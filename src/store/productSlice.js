@@ -19,8 +19,8 @@ export default productSlice.reducer;
 
 export function getProducts() {
     return async function getProductsThunk(dispatch, getState) {
-        const data = await fetch('https://fakestoreapi.com/products')
-        const result = data => data.json()
-        dispatch(fetchProducts(result))
+        const data = await fetch('https://fakestoreapi.com/products');
+        const result = await data.json();
+        dispatch(fetchProducts(result));
     }
 }
