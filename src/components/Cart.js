@@ -1,10 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { remove } from "../store/cartSlice";
 
 const Cart = () => {
-
     const products = useSelector(state => state.cart);
+
+    const dispatch = useDispatch();
+
+    const removeToCart = (id) => {
+        // dispatch a remove action
+        dispatch(remove(id));
+    }
 
     const cards = products.map(product => (
         <div className="col-md-1"  style={{ margin: '5px'}}>
@@ -20,7 +27,7 @@ const Cart = () => {
             </Card.Body>
             
             <Card.Footer style={{background: 'white'}}>
-                <Button variant="danger">Remove Item</Button>
+                <Button variant="danger" onClick={() => removeToCart(product.id)}>Remove Item</Button>
             </Card.Footer>
         </Card>   
     </div>
