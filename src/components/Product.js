@@ -4,10 +4,11 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../store/cartSlice";
 import { getProducts } from "../store/productSlice";
+import { Alert } from "bootstrap";
 
 const Product = () => {
     const dispatch = useDispatch();
-    const {data: products} = useSelector(state => state.products); 
+    const {data: products, status} = useSelector(state => state.products); 
 
     useEffect(()=>{
 
@@ -19,6 +20,16 @@ const Product = () => {
         //.then(result => getProducts(result));
 
     }, []);
+
+    if(status === "loading") {
+        return <p>Loading ...</p>
+    }
+
+    if(status === "error") {
+        return <Alert key="danger" variant="danger">
+            Something went wrong! try again later
+            </Alert>
+    }
 
     const addToCart = (product) => {
         // dispatch an add action (don't call directily the action)
