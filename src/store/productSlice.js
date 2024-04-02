@@ -3,7 +3,7 @@ import StatusCode from "../utils/StatusCode";
 
 const initialState = {
     data: [],
-    status: 'idle'
+    status: StatusCode.IDLE
 };
 
 const productSlice = createSlice({
